@@ -1,0 +1,30 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+	
+	cout << "Enter a URL: ";
+	string URL;
+	cin >> URL;
+	
+	//Testing URL = "https://example.com/some/path/to/file.txt";
+
+	//Find first "//"
+	int schemeEnd = URL.find("//");
+	//substring from beginning to first "//"
+	string schemeSub = URL.substr(0,schemeEnd);
+	cout <<"Scheme: " << schemeSub << endl;
+	
+
+	//Find first "/" starting after "//"
+	int authorityEnd = URL.find("/", schemeEnd + 2);
+	//substring uses start position and characters after it
+	string authoritySub = URL.substr(schemeEnd, authorityEnd-schemeEnd);
+	cout << "Authority: " << authoritySub << endl;
+
+
+	//path is just everything after the authority
+	string pathSub = URL.substr(authorityEnd);
+	cout << "Path: " << pathSub;
+}
